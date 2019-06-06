@@ -2067,7 +2067,7 @@ a, button, .item-overlay, .global-overlay, .pagination li .page-number, .scroll-
 *****************************/
 .mini-cart {
   position: fixed;
-  width: 420px;
+  width: 720px;
   min-height: 100vh;
   z-index: 99999;
   -webkit-transition: all 400ms ease-out;
