@@ -11,6 +11,9 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+        <script src="https://kit.fontawesome.com/848bdd6d4c.js"></script>
 
     </head>
     <body>
@@ -34,6 +37,8 @@
             <div class="content">
                 <!-- Main Content Wrapper Start -->
                 <main class="main-content-wrapper">
+
+                    @yield('content')
 
                 </main>
 
