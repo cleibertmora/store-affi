@@ -49,13 +49,24 @@
 
         @include('layout.addons.cart')
 
-        @include('layout.addons.formsRight')
+        @include('forms.elem-login')
+
+        {{-- @if(!Auth::guest())
+            @if (Auth::user()->admin()) --}}
+            
+                @include('forms.elem-categories')
+{{--             
+            @endif
+        @endif --}}
 
         @include('layout.addons.search')
 
         @include('layout.addons.quickView')
 
         <!-- Global Overlay Start -->
+
+        <div class="global-overlay-new" id="overlay-elem"></div>
+
         <div class="global-overlay"></div>
         <!-- Global Overlay End -->
 

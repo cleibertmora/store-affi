@@ -8,3 +8,27 @@
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
 }
+
+.btn-small {
+    padding: 10px;
+    font-size: 1.5rem;
+    font-weight: bold; 
+}
+
+.global-overlay-new {
+    position: fixed;
+    background-color: rgba(41, 35, 35, 0.7);
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 250ms ease-out;
+    top: 0;
+    left: 0;
+}
+
+.global-overlay-new.overlay-open-new{
+    visibility: visible;
+    opacity: 1;
+}

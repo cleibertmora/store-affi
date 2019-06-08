@@ -187,6 +187,16 @@
 		}
 	});
 
+	// FUNCIONES PARA CARGAR CADA FORMULARIO
+
+	$('#catedories-btn').on('click', function(e){
+		e.preventDefault();
+		//$body.toggleClass('body-open');
+		$('#elem-categories').toggleClass('open');
+		$('#overlay-elem').addClass('overlay-open-new');
+		console.log('eo');
+	});
+
 	/**********************
 	*Click on Documnet
 	***********************/
@@ -213,6 +223,7 @@
 		var $this = $(this);
 		$this.parents('.open').removeClass('open');
 		$($overlay).removeClass('overlay-open');
+		$('#overlay-elem').removeClass('overlay-open-new');
 	});
 
 

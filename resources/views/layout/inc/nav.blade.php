@@ -56,7 +56,7 @@
                                     <div class="header-toolbar-wrap">
                                         <div class="header-toolbar">
                                             <div class="header-toolbar__item header-toolbar--search-btn">
-                                                <a href="#formsRigth" class="mainmenu__link toolbar-btn">
+                                                <a href="#login-form" class="mainmenu__link toolbar-btn">
                                                     <i class="fa fa-user-circle"></i>
                                                 </a>
                                             </div>

@@ -4,8 +4,10 @@
         <div class="row mb--35 mb-md--23">
             <div class="col-12 text-center">
                 <h2>Categorías Principales</h2>
-                @if (Auth::user()->admin())
-                    <a>Add New Category</a>
+                @if(!Auth::guest())
+                    @if (Auth::user()->admin())
+                        <a href="#categories-elem" id="catedories-btn" class="btn btn-small btn-outline">Add New Category</a>
+                    @endif
                 @endif
             </div>
         </div>
