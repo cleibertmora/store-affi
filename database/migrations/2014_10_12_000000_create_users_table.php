@@ -19,12 +19,19 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->text('bio')->nullable();
-            $table->string('country')->nullable();
-            $table->text('city')->nullable();
+            $table->integer('country')->unsigned()->nullable();
+            $table->integer('city')->unsigned()->nullable();
             $table->enum('level', ['admin', 'customer'])->default('customer');
             $table->string('image', 100)->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('country')->references('id')->on('countries')
+                ->onDelete('cascade');
+
+            $table->foreign('city')->references('id')->on('cities')
+                ->onDelete('cascade');
+
         });
     }
 
