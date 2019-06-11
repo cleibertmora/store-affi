@@ -17,8 +17,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('categories', 'CategoriesController');
+Route::resource('categories', 'CategoriesController', ['except' => ['show']]);
 
-Route::get('/category/updateCategory', ['CategoriesController@updateCategory', 'as' => 'categories.updateCategory']);
+Route::get('/{id}', 'CategoriesController@show')->name('show.category');
 
 //Route::get('/forms-login', 'FormsController')->name('LogIn');

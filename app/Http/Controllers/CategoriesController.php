@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use DB;
 use App\Category;
 use App\User;
+
 
 class CategoriesController extends Controller
 {
@@ -83,9 +85,12 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $category = DB::table('categories')
+                    ->where('slug', '=', $slug);
+
+        return view('categories.show')->with('category', $category);
     }
 
     /**
@@ -96,7 +101,10 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+    
+        return view('categories.edit')->with('category', $category);
+    
     }
 
     /**
@@ -106,9 +114,39 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+
+        // Handle File Upload
+        if($request->hasFile('imagen')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('imagen')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('imagen')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('imagen')->storeAs('categories-thumbnail', $fileNameToStore, 'uploads');
+            //$path = Storage::putFileAs(
+
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }    
+
+        $category->imagen     = $fileNameToStore;
+        $category->name       = $request->name;
+        $category->slug       = $request->slug;
+        $category->seo_title  = $request->seo_title;
+        $category->meta_description = $request->meta_description;
+        $category->description= $request->description;
+        $category->user_id= auth()->user()->id;
+
+        $category->save();
+        
+        return redirect('/');
     }
 
     public function updateCategory(Request $request)

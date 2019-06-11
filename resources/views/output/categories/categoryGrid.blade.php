@@ -22,11 +22,11 @@
                                 <div class="blog__media">
                                     <figure class="image">
                                         <img src="upload/categories-thumbnail/{{ $category->imagen }}" alt="Blog" class="w-100">
-                                        <a href="blog-details-image.html" class="item-overlay"></a>
+                                        <a href="{{ route('show.category', $category->slug) }}" class="item-overlay"></a>
                                     </figure>
                                 </div>
                                 <div class="blog__info">
-                                    <h2 class="blog__title"><a href="blog-details-image.html">{{ $category->name }}</a>&nbsp;&nbsp; <a href="#edit-category"><i class="fas fa-edit"></i></a></h2>
+                                    <h2 class="blog__title"><a href="{{ route('show.category', $category->slug) }}">{{ $category->name }}</a>&nbsp;&nbsp; <a href="{{ route('categories.edit', $category->id) }}"><i class="fas fa-edit"></i></a></h2>
                                 </div>
                             </div>
                         </article>

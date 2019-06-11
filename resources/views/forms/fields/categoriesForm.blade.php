@@ -1,4 +1,3 @@
-{{ Form::text('user_id', Auth::user()->id, ['hidden']) }}
 
 <div class="form__group">
     {{ Form::label('name', 'Nombre de la Categoria'), ['class' => 'form__label'] }}
