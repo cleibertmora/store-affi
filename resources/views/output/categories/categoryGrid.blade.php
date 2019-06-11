@@ -11,65 +11,30 @@
                 @endif
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="element-carousel" data-slick-options='{
-                    "spaceBetween": 30,
-                    "slidesToShow": 3,
-                    "slidesToScroll": 1
-                }'
-                data-slick-responsive='[
-                    {"breakpoint": 992, "settings": {"slidesToShow": 2}},
-                    {"breakpoint": 768, "settings": {"slidesToShow": 1}}
-                ]'>
-                    <div class="item">
+
+        @foreach($categories->chunk(3) as $item)
+        <div class="col-12">
+            <div class="row">        
+                @foreach($item as $category)
+                    <div class="item col-lg-4 col-md-6 col-sm-12">
                         <article class="blog">
                             <div class="blog__inner">
                                 <div class="blog__media">
                                     <figure class="image">
-                                        <img src="assets/img/blog/blog-01.jpg" alt="Blog" class="w-100">
+                                        <img src="upload/categories-thumbnail/{{ $category->imagen }}" alt="Blog" class="w-100">
                                         <a href="blog-details-image.html" class="item-overlay"></a>
                                     </figure>
                                 </div>
                                 <div class="blog__info">
-                                    <h2 class="blog__title"><a href="blog-details-image.html">There are many variations of passages of Lorem.</a></h2>
+                                    <h2 class="blog__title"><a href="blog-details-image.html">{{ $category->name }}</a>&nbsp;&nbsp; <a href="#edit-category"><i class="fas fa-edit"></i></a></h2>
                                 </div>
                             </div>
                         </article>
                     </div>
-                    <div class="item">
-                        <article class="blog">
-                            <div class="blog__inner">
-                                <div class="blog__media">
-                                    <figure class="image">
-                                        <img src="assets/img/blog/blog-02.jpg" alt="Blog" class="w-100">
-                                        <a href="blog-details-image.html" class="item-overlay"></a>
-                                    </figure>
-                                </div>
-                                <div class="blog__info">
-                                    <h2 class="blog__title"><a href="blog-details-image.html">There are many variations of passages of Lorem.</a></h2>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="item">
-                        <article class="blog">
-                            <div class="blog__inner">
-                                <div class="blog__media">
-                                    <figure class="image">
-                                        <img src="assets/img/blog/blog-03.jpg" alt="Blog" class="w-100">
-                                        <a href="blog-details-image.html" class="item-overlay"></a>
-                                    </figure>
-                                </div>
-                                <div class="blog__info">
-                                    <h2 class="blog__title"><a href="blog-details-image.html">There are many variations of passages of Lorem.</a></h2>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
+                @endforeach                    
             </div>
         </div>
+        @endforeach
         
     </div>
 </section>

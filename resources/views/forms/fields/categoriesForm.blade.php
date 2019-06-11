@@ -31,7 +31,7 @@
 </div>
 
 <div class="form__group">
-    {{ Form::label('imagen', 'Imagen de categoria (370px x 410px)'), ['class' => 'form__label'] }}
+    {{ Form::label('imagen', 'Imagen de categoria (370px x 270px)'), ['class' => 'form__label'] }}
     <br/>
     {{ Form::file('imagen', null, ['class' => 'form-control-file', 'id' => 'imagen']) }}
 </div>

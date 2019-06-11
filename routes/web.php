@@ -19,4 +19,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('categories', 'CategoriesController');
 
+Route::get('/category/updateCategory', ['CategoriesController@updateCategory', 'as' => 'categories.updateCategory']);
+
 //Route::get('/forms-login', 'FormsController')->name('LogIn');

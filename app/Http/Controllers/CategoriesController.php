@@ -46,9 +46,35 @@ class CategoriesController extends Controller
     {
         $category = new Category;
 
-        $category = Category::create($request->all());
+        // Handle File Upload
+        if($request->hasFile('imagen')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('imagen')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('imagen')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('imagen')->storeAs('categories-thumbnail', $fileNameToStore, 'uploads');
+            //$path = Storage::putFileAs(
 
-        return view('index');
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }    
+
+        $category->imagen     = $fileNameToStore;
+        $category->name       = $request->name;
+        $category->slug       = $request->slug;
+        $category->seo_title  = $request->seo_title;
+        $category->meta_description = $request->meta_description;
+        $category->description= $request->description;
+        $category->user_id= auth()->user()->id;
+
+        $category->save();
+        
+        return redirect('/');
     }
 
     /**
@@ -80,7 +106,12 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
+    {
+        //
+    }
+
+    public function updateCategory(Request $request)
     {
         //
     }

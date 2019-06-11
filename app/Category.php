@@ -9,7 +9,7 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = [
-        'name', 'slug', 'seo_title', 'meta_description', 'description', 'user_id'
+        'name', 'slug', 'seo_title', 'meta_description', 'description', 'user_id', 'texto_header', 'texto_footer', 'imagen'
     ];
 
     public function user()

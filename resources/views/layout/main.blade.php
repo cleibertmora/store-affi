@@ -55,6 +55,8 @@
             @if (Auth::user()->admin()) --}}
             
                 @include('forms.elem-categories')
+
+                @include('forms.edit-category')
 {{--             
             @endif
         @endif --}}
