@@ -24,6 +24,10 @@
     <div class="shop-page-wrapper ptb--80">
         <div class="container">
 
+            <div class="text-center mb-8">
+                <a type="button" href="{{ route('products.create') }}" class="btn">Agregar Producto</a>
+            </div>
+
             <div class="shop-products">
                 <div class="row">
                     <div class="col-xl-4 col-sm-6 mb--50">
