@@ -36,3 +36,8 @@
 .form__group{
     margin-bottom: 20px;
 }
+
+.btn-detail-product{
+    width: 20rem;
+    margin-top: 10px;
+}
