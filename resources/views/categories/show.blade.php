@@ -24,14 +24,19 @@
     <div class="shop-page-wrapper ptb--80">
         <div class="container">
 
-            <div class="text-center mb-8">
-                <a type="button" href="{{ route('products.create') }}" class="btn">Agregar Producto</a>
+            <div class="text-center mb-8" style="margin-bottom: 20px">
+                <a type="button" href="{{ route('products.create') }}" class="btn btn-primary">Agregar Producto</a>
             </div>
 
             <div class="shop-products">
-                <div class="row">
-                    <div class="col-xl-4 col-sm-6 mb--50">
 
+            <div class="row">
+
+            {{-- @foreach($products->chunk(3) as $item) --}}
+
+            @foreach($products as $product)
+
+            <div class="col-xl-4 col-sm-6 mb--50">
                             <div class="ft-product">
                                     <div class="product-inner">
                                         <div class="product-image">
@@ -53,11 +58,12 @@
                                             </div>
                                         </div>
                                         <div class="product-info text-center">
-                                            <h3 class="product-title"><a href="product-details.html">Golden Easy Spot Chair.</a></h3>
+                                            <h3 class="product-title"><a href="product-details.html">{{ $product->name }}</a></h3>
                                             <div class="product-category">
-                                                <a href="product-details.html">Chair</a>
+                                                <a href="product-details.html">{{ $product->meta_description }}</a>
+                                                <a href="{{ route('products.edit', $product->id) }}"><i class="fas fa-edit"></i></a>
                                             </div>
-                                            <p><button data-toggle="modal" data-target="#productModal" type="button" class="btn btn-size-sm btn-shape-square btn-detail-product">
+                                            <p><button data-toggle="modal" data-target="#productModal" onclick="getContentForModal( this, {{ $product->id }} )" type="button" class="btn btn-size-sm btn-shape-square btn-detail-product">
                                                     Ver
                                                 </button></p>
                                             <div class="product-info-bottom">
@@ -85,17 +91,52 @@
                                             </div>
                                         </figure>
                                         <div class="product-info">
-                                                                                       
+                                            <div id="title_product_id_{{ $product->id }}">{{ $product->name }}</div>                                 
+                                            <div name="contenido-modal" id="contenido_product_id_{{ $product->id }}">{{ $product->description }}</div>
+                                            <a id="product-link_{{ $product->id }}" href="{{ route('products-click', $product->id) }}"></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        @endforeach
 
-                    </div>
                 </div>
-            </div>
 
+            {{-- @endforeach --}}
+
+            </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('customjs')
+
+<script>
+
+$( document ).ready(function() {
+    
+});
+
+function getContentForModal( item, id ){
+    var contenido    = $('#contenido_product_id_' + id).html();
+    var title        = $('#title_product_id_' + id).html();
+    var productLink  = $('#product-link_' + id).attr('href');
+    
+    var title_modal     = $('#product-title-modal');
+    var contenido_modal = $('#product-description-modal');
+    //var modal     = $( item );
+
+    title_modal.empty();
+    title_modal.html(title);
+    contenido_modal.empty();
+    contenido_modal.html(contenido)
+
+    //modal.data('toggle', 'modal');
+
+    console.log(productLink);
+
+}
+</script>
+
 @endsection

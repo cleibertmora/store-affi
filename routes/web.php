@@ -23,4 +23,6 @@ Route::get('/{id}', 'CategoriesController@show')->name('show.category');
 
 Route::resource('products', 'ProductsController', ['except' => ['show']]);
 
+Route::get('/products-click/{id}', ['uses' => 'ProductsController@viewProduct', 'as' => 'products-click']);
+
 //Route::get('/forms-login', 'FormsController')->name('LogIn');

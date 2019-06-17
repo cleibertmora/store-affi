@@ -4094,3 +4094,35 @@ a, button, .item-overlay, .global-overlay, .pagination li .page-number, .scroll-
     margin-bottom: 7.6rem; } }
 
 
+@media (min-width: 980px) {
+  .button-bottom {
+    padding: 4.8rem;
+    background: #ff5151;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: fixed;
+    right: 10px;
+    bottom: 60px;
+   z-index: 1;
+  }
+}
+
+.button-bottom {
+    padding: 3.8rem;
+    background: #ff5151;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position: fixed;
+    right: 40px;
+    bottom: 60px;
+    z-index: 1;
+    -webkit-box-shadow: 13px 9px 52px -30px rgba(0,0,0,0.38);
+    -moz-box-shadow: 13px 9px 52px -30px rgba(0,0,0,0.38);
+    box-shadow: 13px 9px 52px -30px rgba(0,0,0,0.38);
+}
+
+.button-bottom  span{
+  background: #fff;
+}

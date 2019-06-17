@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Category;
 use App\User;
+use App\Product;
 
 
 class CategoriesController extends Controller
@@ -15,7 +16,10 @@ class CategoriesController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
+
+        $this->middleware('auth')->except('show');
+
     }
 
     /**
@@ -25,7 +29,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -88,9 +92,26 @@ class CategoriesController extends Controller
     public function show($slug)
     {
         $category = DB::table('categories')
-                    ->where('slug', '=', $slug);
+                    ->where('slug', '=', $slug)->get();
 
-        return view('categories.show')->with('category', $category);
+        $category_id;
+
+        foreach( $category as $val ){
+            $category_id = $val->id;
+        }
+        
+        
+        $products  = DB::table('products')
+                    ->join('category_product', 'products.id', '=', 'category_product.product_id')
+                    ->join('categories', 'category_product.category_id', '=', 'categories.id')
+                    ->select('products.*')
+                    ->where('categories.id', '=', $category_id)->get();
+
+        //dd($product);
+
+        return view('categories.show')
+               ->with('category', $category)
+               ->with('products', $products);
     }
 
     /**

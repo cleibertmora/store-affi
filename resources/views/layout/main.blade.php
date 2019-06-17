@@ -15,6 +15,8 @@
 
         <script src="https://kit.fontawesome.com/848bdd6d4c.js"></script>
 
+        @yield('customcss')
+
     </head>
     <body>
 
@@ -77,5 +79,8 @@
 
         <script src="{{ asset('js/vendor.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
+
+        @yield('customjs')
+
     </body>
 </html>

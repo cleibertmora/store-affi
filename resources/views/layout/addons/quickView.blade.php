@@ -41,8 +41,8 @@
                               <a href="#" class="prev"><i class="la la-angle-double-left"></i></a>
                               <a href="#" class="next"><i class="la la-angle-double-right"></i></a>
                           </div> --}}
-                          <h3 class="product-title mb--20">Golden Easy Spot Chair.</h3>
-                          <p class="product-short-description mb--25">Donec accumsan auctor iaculis. Sed suscipit arcu ligula, at egestas magna molestie a. Proin ac ex maximus, ultrices justo eget, sodales orci. Aliquam egestas libero ac turpis pharetra, in vehicula lacus scelerisque. Vestibulum ut sem laoreet, feugiat tellus at, hendrerit arcu.</p>
+                          <h3 id="product-title-modal" class="product-title mb--20"></h3>
+                          <p id="product-description-modal" class="product-short-description mb--25"></p>
                           
                           <div class="product-action d-flex flex-sm-row flex-column align-items-sm-center align-items-start mb--30">
                               <button type="button" class="btn btn-shape-square" onclick="window.location.href='cart.html'">

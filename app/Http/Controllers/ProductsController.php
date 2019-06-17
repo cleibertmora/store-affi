@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Product;
 use App\User;
+use App\Category;
 
 class ProductsController extends Controller
 {
@@ -28,7 +29,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::orderBy('id', 'DESC')->get();
+
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -69,6 +72,8 @@ class ProductsController extends Controller
         $product->user_id        = auth()->user()->id;
 
         $product->save();
+
+        $product->category()->attach($request->get('categories'));
         
         return redirect('/');
     }
@@ -92,7 +97,10 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product    = Product::find($id);
+        $categories = Category::orderBy('name', 'ASC')->get();
+
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -104,7 +112,37 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product    = Product::find($id);
+
+        $product->fill($request->all())->save();
+
+        $iduser = auth()->user()->id;
+
+        $product->fill(['user_id' => $iduser])->save();
+
+        // Handle File Upload
+        if($request->hasFile('photo')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('photo')->storeAs('products-thumbnail', $fileNameToStore, 'uploads');
+            //$path = Storage::putFileAs(
+
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }    
+
+        $product->fill(['photo' => $fileNameToStore])->save();
+
+        $product->category()->sync($request->get('categories'));
+
+        return redirect('/');
     }
 
     /**
@@ -117,4 +155,18 @@ class ProductsController extends Controller
     {
         //
     }
+
+    public function viewProduct($id){
+        $product = Product::find($id);
+
+        $link    = $product->affiliate_link;
+
+        if(auth()){
+            return view('redirect_to_store');
+        }{
+            
+        }
+
+        dd($link);
+    }   
 }

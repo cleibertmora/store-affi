@@ -10,7 +10,7 @@
 
 <section class="blog-area mb--70 mb-md--50">
     <div class="container">
-        {{ Form::open(['route' => 'products.store', 'method' => 'post', 'files' => true], ['class' => 'form']) }}
+        {{ Form::model($product, ['route' => ['products.update', $product->id], 'method' => 'put', 'files' => true], ['class' => 'form']) }}
 
         @include('products.inc.form')
 

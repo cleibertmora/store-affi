@@ -32,8 +32,36 @@
     <div class="form__group">
         {{ Form::label('affiliate_link', 'Link afiliado'), ['class' => 'form__label'] }}
     
-        {{ Form::textarea('affiliate_link', null, ['class' => 'form__input form__input--textarea', 'id' => 'affiliate_link']) }}
+        {{ Form::text('affiliate_link', null, ['class' => 'form__input', 'id' => 'affiliate_link']) }}
     </div>
+
+    {{-- <div class="form__group">
+        {{ Form::label('cagegories', 'Categorías a las que pertenece el producto'), ['class' => 'form__label'] }}
+    
+        {{ Form::text('categories', null, ['class' => 'form__input', 'id' => 'categories', 'data-role' => 'tagsinput']) }}
+    </div> --}}
+
+    {{-- <div class="form__group">
+        {{ Form::label('categories', 'Categorias') }}
+        <div>
+        @foreach($arr as $val => $key)
+            <label>
+                {{ Form::checkbox('categories[]', $key['id'], ['checked']) }} {{ $key['name'] }}
+            </label>&nbsp;&nbsp;&nbsp;&nbsp;
+        @endforeach
+        </div>
+    </div> --}}
+
+    <div class="form__group">
+            {{ Form::label('categories', 'Categorias') }}
+            <div>
+            @foreach($categories as $category)
+                <label>
+                    {{ Form::checkbox('categories[]', $category->id) }} {{ $category->name }}
+                </label>&nbsp;&nbsp;&nbsp;&nbsp;
+            @endforeach
+            </div>
+        </div>
     
     <div class="form__group">
         {{ Form::label('photo', 'Imagen de categoria (370px x 270px)'), ['class' => 'form__label'] }}
