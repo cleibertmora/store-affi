@@ -108,6 +108,9 @@
         </div>
     </div>
 </div>
+
+@include('forms.elem-create_account')
+
 @endsection
 
 @section('customjs')
@@ -149,27 +152,34 @@ function redirectToProduct( elem ){
     var auth = action_btn.data('auth');
     var idproduct = action_btn.data('idproduct');
 
-    $.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		}
-    });
+    if(auth == '1'){
+        
+        $('#productModal').modal('hide');
+        $('#createAccountModal').modal('show');
+        
+    }else{
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-    $.ajax({
-            type     : 'POST',
-            url      : url,
-            dataType : 'json',
-            data: {
-                auth: auth,
-                idproduct: idproduct	
+        $.ajax({
+                type     : 'POST',
+                url      : url,
+                dataType : 'json',
+                data: {
+                    auth: auth,
+                    idproduct: idproduct	
+                },
+            success: function(data){
+                console.log(data);
             },
-        success: function(data){
-            console.log(data);
-        },
-        error: function (data) {
-            console.log('Error:', data);
-        }
-    });
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+    }
 }
 </script>
 

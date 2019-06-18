@@ -25,4 +25,8 @@ Route::resource('products', 'ProductsController', ['except' => ['show']]);
 
 Route::post('/products-click', ['uses' => 'ProductsController@viewProduct', 'as' => 'products-click']);
 
+Route::get('/products/redirect', function(){
+    return view('products.redirect');
+});
+
 //Route::get('/forms-login', 'FormsController')->name('LogIn');
