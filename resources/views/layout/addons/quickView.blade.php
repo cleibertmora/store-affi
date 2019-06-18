@@ -45,7 +45,7 @@
                           <p id="product-description-modal" class="product-short-description mb--25"></p>
                           
                           <div class="product-action d-flex flex-sm-row flex-column align-items-sm-center align-items-start mb--30">
-                              <button type="button" class="btn btn-shape-square" onclick="window.location.href='cart.html'">
+                              <button data-link="" data-auth="" data-idproduct="" id="product-action-btn" type="button" onclick="redirectToProduct( this )" class="btn btn-shape-square">
                                   Check it out
                               </button>
                           </div>  

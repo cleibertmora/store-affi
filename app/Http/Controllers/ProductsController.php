@@ -156,17 +156,12 @@ class ProductsController extends Controller
         //
     }
 
-    public function viewProduct($id){
-        $product = Product::find($id);
-
-        $link    = $product->affiliate_link;
-
-        if(auth()){
-            return view('redirect_to_store');
-        }{
-            
-        }
-
-        dd($link);
+    public function viewProduct(Request $request){
+        $auth = $request->auth;
+        $id   = $request->idproduct;
+        
+        //$product = Product::find($request->id);
+        
+        return response()->json($auth);
     }   
 }

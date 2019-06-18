@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
         <script src="https://kit.fontawesome.com/848bdd6d4c.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         @yield('customcss')
 

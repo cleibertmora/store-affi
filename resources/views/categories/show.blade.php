@@ -93,7 +93,7 @@
                                         <div class="product-info">
                                             <div id="title_product_id_{{ $product->id }}">{{ $product->name }}</div>                                 
                                             <div name="contenido-modal" id="contenido_product_id_{{ $product->id }}">{{ $product->description }}</div>
-                                            <a id="product-link_{{ $product->id }}" href="{{ route('products-click', $product->id) }}"></a>
+                                            <a id="product-link_{{ $product->id }}" data-auth="{{ Auth::guest() }}" href="{{ route('products-click') }}"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -121,21 +121,55 @@ $( document ).ready(function() {
 function getContentForModal( item, id ){
     var contenido    = $('#contenido_product_id_' + id).html();
     var title        = $('#title_product_id_' + id).html();
-    var productLink  = $('#product-link_' + id).attr('href');
+    var elemLink     = $('#product-link_' + id);
+    var productLink  = elemLink.attr('href').toString();
+    var isAuth       = elemLink.data('auth').toString();
     
     var title_modal     = $('#product-title-modal');
     var contenido_modal = $('#product-description-modal');
-    //var modal     = $( item );
+    var button_action   = $('#product-action-btn');
 
     title_modal.empty();
     title_modal.html(title);
     contenido_modal.empty();
-    contenido_modal.html(contenido)
+    contenido_modal.html(contenido);
 
-    //modal.data('toggle', 'modal');
+    button_action[0].dataset.auth = '';
+    button_action[0].dataset.link = '';
+    button_action[0].dataset.id = '';
 
-    console.log(productLink);
+    button_action[0].dataset.auth = isAuth;
+    button_action[0].dataset.link = productLink;
+    button_action[0].dataset.idproduct = id;
+}
 
+function redirectToProduct( elem ){
+    var action_btn = $('#product-action-btn');
+    var url  = action_btn.data('link');
+    var auth = action_btn.data('auth');
+    var idproduct = action_btn.data('idproduct');
+
+    $.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+    });
+
+    $.ajax({
+            type     : 'POST',
+            url      : url,
+            dataType : 'json',
+            data: {
+                auth: auth,
+                idproduct: idproduct	
+            },
+        success: function(data){
+            console.log(data);
+        },
+        error: function (data) {
+            console.log('Error:', data);
+        }
+    });
 }
 </script>
 
