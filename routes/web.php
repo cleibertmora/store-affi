@@ -13,6 +13,8 @@
 
 Route::get('/', ['uses' => 'PagesController@index', 'as' => 'index']);
 
+Route::post('/register-ajax', ['uses' => 'Auth\RegisterController@register', 'as' => 'registerAjax']);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

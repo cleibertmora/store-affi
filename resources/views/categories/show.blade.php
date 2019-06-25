@@ -181,6 +181,37 @@ function redirectToProduct( elem ){
         });
     }
 }
+
+$('#sign-up-form').on('submit', function(e){
+    e.preventDefault();
+    var action = $( this ).attr('action');
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+            type     : 'POST',
+            url      : action,
+            dataType : 'json',
+            data: {
+                name: $('#name_signup').val(),
+                email   : $('#email_signup').val(),
+                password: $('#password_signup').val(),
+            },
+        success: function(data){
+            console.log(data);
+        },
+        error: function (data) {
+            console.log('Error:', data);
+        }
+    });
+    
+    console.log(action);
+});
+
 </script>
 
 @endsection
