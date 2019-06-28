@@ -118,6 +118,7 @@
 <script>
 
 $( document ).ready(function() {
+
     
 });
 
@@ -183,7 +184,10 @@ function redirectToProduct( elem ){
 }
 
 $('#sign-up-form').on('submit', function(e){
+
     e.preventDefault();
+    var home = $('#url-home').val();
+
     var action = $( this ).attr('action');
 
     $.ajaxSetup({
@@ -202,14 +206,15 @@ $('#sign-up-form').on('submit', function(e){
                 password: $('#password_signup').val(),
             },
         success: function(data){
-            console.log(data);
+            if(data.id){
+                window.location.replace(home);
+            }
         },
         error: function (data) {
             console.log('Error:', data);
         }
     });
     
-    console.log(action);
 });
 
 </script>

@@ -8,7 +8,7 @@
         <div class="modal-body signup-form" style="padding: 50px">
             
             
-
+          <input type="hidden" id="url-home" value="{{ route('index') }}">
 
 
             <div class="row">

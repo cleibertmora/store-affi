@@ -2,6 +2,8 @@
 
 	'use strict';
 
+	//console.log(windows.location);
+
     // Check if element exists
     $.fn.elExists = function() {
         return this.length > 0;

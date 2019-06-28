@@ -91,7 +91,7 @@ class RegisterController extends Controller
 
             //$url = route('/');
 
-            return true;
+            return response()->json($user);
             //return redirect('/');
         
         }
