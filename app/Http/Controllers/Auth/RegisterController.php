@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use MailerLiteApi\MailerLite;
+
 
 class RegisterController extends Controller
 {
@@ -85,13 +87,35 @@ class RegisterController extends Controller
             return response()->json($validation->errors()->toArray());
         
         }else{
-            
+        
+            $mailerliteClient = new MailerLite('99b6ae3965bdf000980c48313f71f88c');
+
+            $groupsApi = $mailerliteClient->groups();
+            $groups = $groupsApi->get(); // returns array of groups
+
+            $groupId = 43056896;
+            $singleGroup = $groupsApi->find($groupId); // returns single item object
+
+
+            $subscriber = [
+                'email' => $request->email,
+                'fields' => [
+                    'name' => $request->name,
+                    //'last_name' => 'Doe',
+                    //'company' => 'John Doe Co.'
+                ]
+            ];
+
+            $response = $groupsApi->addSubscriber($groupId, $subscriber);
+
             $user = $this->create($request->all());
             Auth::login($user);
 
+            return response()->json($user);
+
             //$url = route('/');
 
-            return response()->json($user);
+            //return response()->json($user);
             //return redirect('/');
         
         }
