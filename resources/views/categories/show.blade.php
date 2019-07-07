@@ -7,10 +7,11 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h1 class="page-title">Shop Three Columns</h1>
+                <h1 class="page-title">{{ $categoryObj->name }}</h1>
+                <p class="page-description">{{ $categoryObj->description }}</p>  
                 <ul class="breadcrumb">
-                    <li><a href="index.html">Home</a></li>
-                    <li class="current"><span>Shop Three Columns</span></li>
+                    <li><a href="{{ route('index') }}">Home</a></li>
+                    <li class="current"><span>{{ $categoryObj->name }}</span></li>
                 </ul>
             </div>
         </div>
@@ -24,9 +25,13 @@
     <div class="shop-page-wrapper ptb--80">
         <div class="container">
 
+            @if(!Auth::guest() && Auth::user()->admin())
+
             <div class="text-center mb-8" style="margin-bottom: 20px">
                 <a type="button" href="{{ route('products.create') }}" class="btn btn-primary">Agregar Producto</a>
             </div>
+
+            @endif
 
             <div class="shop-products">
 
@@ -42,7 +47,7 @@
                                         <div class="product-image">
                                             <a data-toggle="modal" data-target="#productModal">
                                             <figure class="product-image--holder">
-                                                <img src="{{ asset('images/1.jpg') }}" alt="Product">
+                                                <img src="upload/products-thumbnail/{{ $product->photo }}" alt="Product">
                                             </figure>
                                             </a>
                                             <div class="product-action">
@@ -61,7 +66,13 @@
                                             <h3 class="product-title"><a href="product-details.html">{{ $product->name }}</a></h3>
                                             <div class="product-category">
                                                 <a href="product-details.html">{{ $product->meta_description }}</a>
-                                                <a href="{{ route('products.edit', $product->id) }}"><i class="fas fa-edit"></i></a>
+
+                                                @if(!Auth::guest() && Auth::user()->admin())
+
+                                                    <a href="{{ route('products.edit', $product->id) }}"><i class="fas fa-edit"></i></a>
+
+                                                @endif
+
                                             </div>
                                             <p><button data-toggle="modal" data-target="#productModal" onclick="getContentForModal( this, {{ $product->id }} )" type="button" class="btn btn-size-sm btn-shape-square btn-detail-product">
                                                     Ver
@@ -91,6 +102,7 @@
                                             </div>
                                         </figure>
                                         <div class="product-info">
+                                            <div id="image_product_id_{{ $product->id }}" src="{{ $product->photo }}"></div>
                                             <div id="title_product_id_{{ $product->id }}">{{ $product->name }}</div>                                 
                                             <div name="contenido-modal" id="contenido_product_id_{{ $product->id }}">{{ $product->description }}</div>
                                             <a id="product-link_{{ $product->id }}" data-auth="{{ Auth::guest() }}" href="{{ route('products-click') }}"></a>
@@ -128,15 +140,24 @@ function getContentForModal( item, id ){
     var elemLink     = $('#product-link_' + id);
     var productLink  = elemLink.attr('href').toString();
     var isAuth       = elemLink.data('auth').toString();
+    var photo        = $('#image_product_id_' + id).attr('src');
+
+    console.log(photo);
     
     var title_modal     = $('#product-title-modal');
     var contenido_modal = $('#product-description-modal');
     var button_action   = $('#product-action-btn');
+    var img_modal       = $('#product-image');
 
     title_modal.empty();
-    title_modal.html(title);
     contenido_modal.empty();
+    img_modal.attr('src', '');
+    img_modal.attr('alt', '');
+
+    title_modal.html(title);
     contenido_modal.html(contenido);
+    img_modal.attr('src', 'upload/products-thumbnail/'+photo);
+    img_modal.attr('alt', title);
 
     button_action[0].dataset.auth = '';
     button_action[0].dataset.link = '';

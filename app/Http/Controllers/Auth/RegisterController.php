@@ -88,7 +88,9 @@ class RegisterController extends Controller
         
         }else{
         
-            $mailerliteClient = new MailerLite('99b6ae3965bdf000980c48313f71f88c');
+            $mailerLiteApi = env('MAILERLITE_API_KEY','');
+
+            $mailerliteClient = new MailerLite($mailerLiteApi);
 
             $groupsApi = $mailerliteClient->groups();
             $groups = $groupsApi->get(); // returns array of groups
@@ -112,11 +114,6 @@ class RegisterController extends Controller
             Auth::login($user);
 
             return response()->json($user);
-
-            //$url = route('/');
-
-            //return response()->json($user);
-            //return redirect('/');
         
         }
     }

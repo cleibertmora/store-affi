@@ -4117,7 +4117,7 @@ a, button, .item-overlay, .global-overlay, .pagination li .page-number, .scroll-
     position: fixed;
     right: 40px;
     bottom: 60px;
-    z-index: 1;
+    z-index: 100;
     -webkit-box-shadow: 13px 9px 52px -30px rgba(0,0,0,0.38);
     -moz-box-shadow: 13px 9px 52px -30px rgba(0,0,0,0.38);
     box-shadow: 13px 9px 52px -30px rgba(0,0,0,0.38);

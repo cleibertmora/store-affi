@@ -20,7 +20,7 @@
                           <div class="product-image">
                               <div class="product-image--holder">
                                   <a href="product-details.html">
-                                      <img src="assets/img/products/prod-01.jpg" alt="Product Image" class="primary-image">
+                                      <img src="" alt="" id="product-image" class="primary-image">
                                   </a>
                               </div>
                               {{-- <span class="product-badge sale">sale</span> --}}

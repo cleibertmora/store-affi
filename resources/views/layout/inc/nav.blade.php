@@ -27,31 +27,69 @@
                                                 </a>
                                             </li>
         
-                                        @if (Route::has('login'))
-                                            <li class="mainmenu__item">
-                                                <a href="#formsRigth" class="mainmenu__link">
-                                                    <span class="mm-text">Log In</span>
+                                            <li class="mainmenu__item menu-item-has-children">
+                                                <a href="#" class="mainmenu__link">
+                                                    <span class="mm-text">Categories</span>
+                                                </a>
+
+                                                <ul class="sub-menu">
+                                                @foreach ($CategoryList as $item)
+                                                    <li>
+                                                        <a href="{{ route('show.category', $item->slug) }}" id="category-{{ $item->id }}">{{ $item->name }}</a>
+                                                    </li>
+                                                @endforeach
+                                                </ul>
+
+                                            </li>
+
+                                            <li class="mainmenu__item menu-item-has-children">
+                                                <a href="#" class="mainmenu__link">
+                                                    <span class="mm-text">Term of use</span>
                                                 </a>
                                             </li>
-                                            <li class="mainmenu__item">
-                                                <a href="{{ route('register') }}" class="mainmenu__link">
-                                                    <span class="mm-text">Register</span>
+                                            <li class="mainmenu__item menu-item-has-children">
+                                                <a href="#" class="mainmenu__link">
+                                                    <span class="mm-text">Contact</span>
                                                 </a>
                                             </li>
-                                        @endif
-                                        
+                                            @if(!Auth::guest())
+                                            <li class="mainmenu__item menu-item-has-children">
+                                                    <a href="#" class="mainmenu__link">
+                                                        <span class="mm-text">{{ Auth::user()->name }}</span>
+                                                    </a>
+                                                    <ul class="sub-menu">
+                                                        <li>
+                                                            <a href="my-account.html">
+                                                                <span class="mm-text">My Account</span>
+                                                            </a>
+                                                            <a href="{{ route('logout') }}"
+                                                            onclick="event.preventDefault();
+                                                                     document.getElementById('logout-form').submit();">
+                                                                <span class="mm-text">Sign Out</span>
+                                                            </a>
+
+                                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                                {{ csrf_field() }}
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                            </li>
+                                            @endif
                                         </ul>
                                     </nav>
                                 </div>
                                 <div class="header__main-right">
                                     <div class="header-toolbar-wrap">
                                         <div class="header-toolbar">
+                                            @if(Auth::guest())
                                             <div class="header-toolbar__item header-toolbar--search-btn">
                                                 <a href="#login-form" class="mainmenu__link toolbar-btn">
                                                     <i class="fa fa-user-circle"></i>
                                                 </a>
                                             </div>
-                                            <div class="header-toolbar__item header-toolbar--search-btn">
+                                            
+                                            @endif
+                                            {{-- <div class="header-toolbar__item header-toolbar--search-btn">
                                                 <a href="#searchForm" class="header-toolbar__btn toolbar-btn">
                                                     <i class="la la-search"></i>
                                                 </a>
@@ -73,7 +111,7 @@
                                                         <span></span>
                                                     </div>
                                                 </a>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

@@ -94,6 +94,8 @@ class CategoriesController extends Controller
         $category = DB::table('categories')
                     ->where('slug', '=', $slug)->get();
 
+        $categoryObj = Category::where('slug','=',$slug)->first();
+
         $category_id;
 
         foreach( $category as $val ){
@@ -107,11 +109,12 @@ class CategoriesController extends Controller
                     ->select('products.*')
                     ->where('categories.id', '=', $category_id)->get();
 
-        //dd($product);
+        //dd($categoryObj);
 
         return view('categories.show')
                ->with('category', $category)
-               ->with('products', $products);
+               ->with('products', $products)
+               ->with('categoryObj', $categoryObj);
     }
 
     /**
