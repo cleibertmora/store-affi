@@ -45,3 +45,7 @@
 .page-description{
     color: #fff;
 }
+
+#product-description-modal > ul {
+    list-style: circle;
+}

@@ -135,14 +135,14 @@ $( document ).ready(function() {
 });
 
 function getContentForModal( item, id ){
-    var contenido    = $('#contenido_product_id_' + id).html();
+    var contenido    = $('#contenido_product_id_' + id).text();
     var title        = $('#title_product_id_' + id).html();
     var elemLink     = $('#product-link_' + id);
     var productLink  = elemLink.attr('href').toString();
     var isAuth       = elemLink.data('auth').toString();
     var photo        = $('#image_product_id_' + id).attr('src');
 
-    console.log(photo);
+    var string       = contenido.toString();
     
     var title_modal     = $('#product-title-modal');
     var contenido_modal = $('#product-description-modal');
@@ -155,7 +155,7 @@ function getContentForModal( item, id ){
     img_modal.attr('alt', '');
 
     title_modal.html(title);
-    contenido_modal.html(contenido);
+    contenido_modal.append(contenido);
     img_modal.attr('src', 'upload/products-thumbnail/'+photo);
     img_modal.attr('alt', title);
 

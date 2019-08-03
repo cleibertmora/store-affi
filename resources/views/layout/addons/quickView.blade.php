@@ -42,7 +42,7 @@
                               <a href="#" class="next"><i class="la la-angle-double-right"></i></a>
                           </div> --}}
                           <h3 id="product-title-modal" class="product-title mb--20"></h3>
-                          <p id="product-description-modal" class="product-short-description mb--25"></p>
+                          <div id="product-description-modal" class="product-short-description mb--25"></div>
                           
                           <div class="product-action d-flex flex-sm-row flex-column align-items-sm-center align-items-start mb--30">
                               <button data-link="" data-auth="" data-idproduct="" id="product-action-btn" type="button" onclick="redirectToProduct( this )" class="btn btn-shape-square">
